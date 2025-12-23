@@ -47,9 +47,16 @@ export default function AddProductForm({ user }) {
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             placeholder="Paste product URL (Amazon, Walmart, etc.)"
-            className="h-12 text-base"
             required
             disabled={loading}
+            className="
+    h-12 text-base
+    bg-white text-gray-900
+    border border-gray-300
+    placeholder:text-gray-400
+    focus-visible:ring-2 focus-visible:ring-black-500
+    focus-visible:border-black-500
+  "
           />
 
           <Button

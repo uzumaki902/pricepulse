@@ -4,7 +4,7 @@ import { LogIn } from "lucide-react";
 import { Rabbit, Shield, Bell } from "lucide-react";
 import AddProductForm from "@/components/ui/AddProductForm";
 import AuthButton from "@/components/ui/AuthButton";
-import { createClient } from "@/utils/superbase/client";
+import { createClient } from "@/utils/supabase/client";
 
 export default async function Home() {
   const superbase = await createClient();
@@ -41,14 +41,14 @@ export default async function Home() {
 "
     >
       <Image
-        src="/p.png"
+        src="/g.png"
         alt="Background"
         fill
         priority
         className="object-cover object-center -z-10"
       />
 
-      <header className="bg-white/80 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-10">
+      <header className="bg-zinc-900/80 backdrop-blur-sm border-b border-b-black-200 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center gap-3">
             <Image
@@ -92,6 +92,25 @@ export default async function Home() {
           )}
         </div>
       </section>
+      {/* Products Grid */}
+      {user && products.length > 0 && (
+        <section className="max-w-7xl mx-auto px-4 pb-20">
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-2xl font-bold text-gray-900">
+              Your Tracked Products
+            </h3>
+            <span className="text-sm text-gray-500">
+              {products.length} {products.length === 1 ? "product" : "products"}
+            </span>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 items-start">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </section>
+      )}
       {user && products.length === 0 && (
         <section className="max-w-2xl mx-auto px-4 pb-20 text-center">
           <div className="bg-white rounded-xl border-2 border-dashed border-gray-300 p-12">
